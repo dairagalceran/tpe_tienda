@@ -17,4 +17,6 @@ class ClassController {
         $classes = $this->model->getAllClasses();
         $this->view->showClasses($classes);
     }
+
+    
 }

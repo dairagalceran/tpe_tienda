@@ -16,7 +16,6 @@ class ClassView {
         $this->smarty->assign('categorias', $classes);
 
         $this->smarty->display('../templates/classList.tpl');
-       
         
     }
 }

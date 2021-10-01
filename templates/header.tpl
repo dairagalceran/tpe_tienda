@@ -26,6 +26,20 @@
                         </li>
                     </ul>
                 </div>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="">Categorias</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="">Indumentaria</a>
+                        </li>
+                    </ul>
+                </div>
                 <div>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
@@ -34,7 +48,7 @@
                     </ul>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="">Registrarse</a>
+                            <a class="nav-link active" aria-current="page" href="userform.tpl">Registrarse</a>
                         </li>
                     </ul>
                 </div>

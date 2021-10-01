@@ -9,17 +9,18 @@ class ClassModel {
     }
 
     /**
-     * Obtener todas las tareas de la DB
+     * Obtener todas las categorias de la DB
      */
     function getAllClasses() {
-        // 1. Enviamos la consulta (2 sub pasos)
         $query = $this->db->prepare('SELECT * FROM categorias');
         $query->execute();
-
-        // 2. obtengo la respuesta de la DB
-        $classes = $query->fetchAll(PDO::FETCH_OBJ); // obtengo un arreglo con TODAS las tareas
+        $classes = $query->fetchAll(PDO::FETCH_OBJ); 
 
         return $classes;
     }
+
+   
+
+ 
 
 }

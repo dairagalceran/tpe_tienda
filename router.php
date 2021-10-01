@@ -1,5 +1,8 @@
 <?php
 require_once 'controllers/classController.php';
+require_once 'controllers/productsController.php';
+
+
 
 // defino la base url para la construccion de links con urls semánticas
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
@@ -15,15 +18,18 @@ else {
 $params = explode('/', $action);
 
 $controller = new ClassController();
+$controllerProducts = new ProductsController();
 
 switch ($params[0]) {
     case 'home':
         $controller->showClasses();
+        $controllerProducts->showProducts();
         break;
-        /*
-    case 'insertar':
-        $controller->addTask();
+     /*   
+    case 'register':
+        $controller->registerUser();
         break;
+        
     case 'borrar':
         $controller->delTask($params[1]);
         break;
@@ -33,10 +39,11 @@ switch ($params[0]) {
     case 'restore':
         $controller->restoreTask($params[1]);
         break;
-    case 'taskView':
-        $controller->showTask($params[1]);   
-        break;
         */
+    case 'productView':
+        $controllerProducts->showProduct($params[1]);   
+        break;
+        
     default:
         echo '404 - Página no encontrada';
         break;
