@@ -1,3 +1,6 @@
+{include file="templates/header.tpl"}
+
+
 <div class="container">
     <div >
         <h3>{$tituloProducts}</h3>
@@ -14,8 +17,8 @@
             <tbody>
             {foreach from=$products item=$product }
                 <tr>
-                    <th scope="row">{$product->categorias|upper}</th>
-                    <td>{$product->nombre_producto}</td>
+                    <th scope="row">{$product->categoria|upper}</th>
+                    <td>{$product->nombre_producto|capitalize}</td>
                     <td>{$product->precio}</td>
                     <td><a class="btn btn-success" href="productView/{$product->id_producto}">Ver</a> </td>
                 </tr>
@@ -27,3 +30,4 @@
 </div>
 
 
+{include file="templates/footer.tpl" assign=name var1=value}

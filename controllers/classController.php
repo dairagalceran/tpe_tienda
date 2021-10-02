@@ -18,5 +18,14 @@ class ClassController {
         $this->view->showClasses($classes);
     }
 
+    public function createEditClass($class){
+        $class = $_REQUEST['categoria'];
+        $this->model->insertClass($class);
+        header("Location: " . BASE_URL."/categoria"); 
+    }
     
+    public function deleteClass($id){
+        $this->model->deleteClass($id);
+        header("Location: " . BASE_URL ."/categoria");
+    }
 }

@@ -22,7 +22,6 @@ $controllerProducts = new ProductsController();
 
 switch ($params[0]) {
     case 'home':
-        $controller->showClasses();
         $controllerProducts->showProducts();
         break;
      /*   
@@ -40,6 +39,15 @@ switch ($params[0]) {
         $controller->restoreTask($params[1]);
         break;
         */
+    case 'categoria':
+        $controller->showClasses();   
+        break;
+    case 'formCategory':
+        $controller->createEditClass($params[1]);   
+        break;
+     case 'deleteCategory':
+        $controller->deleteClass($params[1]);   
+         break;
     case 'productView':
         $controllerProducts->showProduct($params[1]);   
         break;

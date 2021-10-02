@@ -19,8 +19,20 @@ class ClassModel {
         return $classes;
     }
 
+    function deleteClass($id){
+        $query = $this->db->prepare('DELETE  FROM  categorias WHERE id_categoria = ?');
+        $query->execute([$id]);
+    }
+
+    function insertClass($class){
+        $query = $this->db->prepare('INSERT INTO categorias(categoria) VALUES (?)');
+        $query->execute([$class]);
+        return $this->db->lastInsertId();
+    }
    
 
- 
-
+    
+    
+    
 }
+
