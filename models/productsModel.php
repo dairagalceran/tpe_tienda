@@ -9,6 +9,7 @@ class ProductsModel {
     }
 
     /**
+     * 
      * Obtener todas los productos de la DB
      */
     function getAllProducts() {
