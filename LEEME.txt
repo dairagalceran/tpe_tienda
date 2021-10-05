@@ -1,0 +1,4 @@
+Antes de utilizar la web hay que:
+
+1. Crear un archivo Config.php dentro de la carpeta config con los datos de configuracion.
+2. Crear la carpeta templates_c en el root del proyecto, con permiso de lectura y escritura para apache/nginx.

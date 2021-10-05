@@ -1,1 +1,4 @@
 templates_c/
+config/Config.php
+.idea
+.DS_Store

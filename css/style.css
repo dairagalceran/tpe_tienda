@@ -1,1 +1,13 @@
+.category-link {
+    text-decoration: none;
+    background: cornflowerblue;
+    color: white;
+    font-weight: bold;
+    padding: 4px;
+    border-radius: 3px;
+}
 
+.category-link:hover, .category-link:visited {
+    text-decoration: none;
+    color: white;
+}

@@ -3,7 +3,7 @@
 
 <div class="container">
     <div >
-        <h3>{$tituloProducts}</h3>
+        <h3>{$title}</h3>
         <table class="table">
             <thead>
                 <tr>
@@ -17,10 +17,10 @@
             <tbody>
             {foreach from=$products item=$product }
                 <tr>
-                    <th scope="row">{$product->categoria|upper}</th>
-                    <td>{$product->nombre_producto|capitalize}</td>
-                    <td>{$product->precio}</td>
-                    <td><a class="btn btn-success" href="productView/{$product->id_producto}">Ver</a> </td>
+                    <td><a class="category-link" href="categories/show/{$product->category_id}">{$product->category|upper}</a></td>
+                    <td>{$product->name|capitalize}</td>
+                    <td>{$product->price}</td>
+                    <td><a class="btn btn-success" href="products/show/{$product->id}">Ver</a> </td>
                 </tr>
             {/foreach}     
             </tbody>
