@@ -9,11 +9,13 @@ class CategoriesController {
     private $categoryModel;
     private $productModel;
     private $view;
+    private $sessionUtils;
 
     public function __construct() {
         $this->categoryModel = new CategoryModel();
         $this->productModel = new ProductModel();
-        $this->view = new CategoriesView();
+        $this->sessionUtils = new SessionUtils();
+        $this->view = new CategoriesView($this->sessionUtils->getCurrentUser());
     }
 
 

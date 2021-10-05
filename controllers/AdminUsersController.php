@@ -1,21 +1,18 @@
 <?php
 
-include_once('models/CategoryModel.php');
-include_once('models/ProductModel.php');
-include_once('views/admin/AdminCategoriesView.php');
+include_once('models/UserModel.php');
+include_once('views/admin/AdminUsersView.php');
 
-class AdminCategoriesController {
+class AdminUsersController {
 
-    private $categoryModel;
-    private $productModel;
+    private $userModel;
     private $view;
     private $sessionUtils;
 
     public function __construct() {
-        $this->categoryModel = new CategoryModel();
-        $this->productModel = new ProductModel();
+        $this->userModel = new UserModel();
         $this->sessionUtils = new SessionUtils();
-        $this->view = new AdminCategoriesView($this->sessionUtils->getCurrentUser());
+        $this->view = new AdminUsersView($this->sessionUtils->getCurrentUser());
     }
 
 
@@ -44,14 +41,14 @@ class AdminCategoriesController {
 
 
     private function index() {
-        $categories = $this->categoryModel->getAll();
-        $this->view->showCategories($categories);
+        $this->view->showAll($this->userModel->getAll());
     }
 
     private function create($isPost){
         if($isPost) {
-            $categoryName = $_REQUEST['name'];
-            $this->categoryModel->insert($categoryName);
+            $name = $_REQUEST['name'];
+            $password = $_REQUEST['password'];
+            $this->userModel->insert($name, $password);
             $this->view->redirectToIndex();
         }else{
             $this->view->showForm(null);
@@ -60,26 +57,27 @@ class AdminCategoriesController {
 
     private function edit($isPost,$params){
         if($isPost) {
-            $categoryName = $_REQUEST['name'];
-            $categoryId= $_REQUEST['id'];
-            $this->categoryModel->update($categoryId, $categoryName);
+            $name = $_REQUEST['name'];
+            $password = $_REQUEST['password'];
+            $isAdmin = $_REQUEST['is_admin'];
+            $id= $_REQUEST['id'];
+            $this->userModel->update($id, $name,md5($password), $isAdmin ? 1 : 0);
             $this->view->redirectToIndex();
         }else{
-            $category = $this->categoryModel->getById($params[0]);
+            $category = $this->userModel->getById($params[0]);
             $this->view->showForm($category);
         }
 
     }
 
     private function delete($id){
-        $this->categoryModel->delete($id);
+        $this->userModel->delete($id);
         $this->view->redirectToIndex();
     }
 
     private function show($id){
-        $category = $this->categoryModel->getById($id);
-        $products = $this->productModel->getByCategory($id);
-        $this->view->showCategory($category,$products);
+        $user = $this->userModel->getById($id);
+        $this->view->showDetail($user);
     }
 
 }

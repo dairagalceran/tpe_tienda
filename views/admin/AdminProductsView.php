@@ -5,16 +5,18 @@ include_once('libs/smarty-master/libs/Smarty.class.php');
 class AdminProductsView {
 
     private $smarty;
+    private $sessionUser;
 
-    function __construct(){
+    function __construct($sessionUser){
         $this->smarty = new Smarty();
+        $this->sessionUser = $sessionUser;
     }
-
     
     function showProducts($products){
         $this->smarty->assign('title','Tu tienda de moda online');
         $this->smarty->assign('products', $products);
-        
+
+        $this->smarty->assign('sessionUser', $this->sessionUser);
         $this->smarty->display('../templates/admin/products/list.tpl');
     }
 
@@ -23,6 +25,7 @@ class AdminProductsView {
         $this->smarty->assign('product', $product);
         $this->smarty->assign('home', BASE_URL);
 
+        $this->smarty->assign('sessionUser', $this->sessionUser);
         $this->smarty->display('../templates/admin/products/detail.tpl');
     }
 
@@ -30,6 +33,8 @@ class AdminProductsView {
         $this->smarty->assign('product',$product);
         $this->smarty->assign('categories',$categories);
         $this->smarty->assign('sizes',['XS','S','M','L','XL','XXL']);
+
+        $this->smarty->assign('sessionUser', $this->sessionUser);
         $this->smarty->display('../templates/admin/products/edit.tpl');
 
     }

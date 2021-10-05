@@ -24,21 +24,29 @@
                     <ul class="navbar-nav  ms-5 ">
                         <li class="nav-item"> <a class="nav-link active"  href="#">Home</a></li>
                         <li class="nav-item"><a class="nav-link active"  href="categories">Categorias</a></li>
-                        <li class="nav-item"><a class="nav-link active"  href="#">Catálogo</a> </li>
+                        {if $sessionUser|default:false && $sessionUser['is_admin'] }
+                        <li class="nav-item"><a class="nav-link active"  href="admin/products">Admin</a> </li>
+                        {/if}
                     </ul>
                 </div>
         
                 <div>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="">Iniciar sesión</a>
+                            {if !$sessionUser|default:false }
+                            <a class="nav-link active" aria-current="page" href="users/login">Iniciar sesión</a>
+                            {else}
+                            <a class="nav-link active" aria-current="page" href="users/logout">Salir de {$sessionUser['email']}</a>
+                            {/if}
                         </li>
                     </ul>
+                    {if !$sessionUser|default:false }
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="userform.tpl">Registrarse</a>
+                            <a class="nav-link active" aria-current="page" href="users/register">Registrarse</a>
                         </li>
                     </ul>
+                    {/if}
                 </div>
             </div>
         </nav>

@@ -5,9 +5,11 @@ include_once('libs/smarty-master/libs/Smarty.class.php');
 class CategoriesView {
 
     private $smarty;
+    private $sessionUser;
 
-    function __construct(){
+    function __construct($sessionUser){
         $this->smarty = new Smarty();
+        $this->sessionUser = $sessionUser;
     }
 
     function showCategories($categories){
@@ -15,6 +17,7 @@ class CategoriesView {
         $this->smarty->assign('title','Categorias');
         $this->smarty->assign('categories', $categories);
 
+        $this->smarty->assign('sessionUser', $this->sessionUser);
         $this->smarty->display('../templates/categories/list.tpl');
         
     }
@@ -24,6 +27,7 @@ class CategoriesView {
         $this->smarty->assign('category',$category);
         $this->smarty->assign('products', $products);
 
+        $this->smarty->assign('sessionUser', $this->sessionUser);
         $this->smarty->display('../templates/categories/detail.tpl');
 
     }

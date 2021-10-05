@@ -9,11 +9,13 @@ class AdminProductsController {
     private $productModel;
     private $categoryModel;
     private $view;
+    private $sessionUtils;
 
     public function __construct() {
         $this->productModel = new ProductModel();
         $this->categoryModel = new CategoryModel();
-        $this->view = new AdminProductsView();
+        $this->sessionUtils = new SessionUtils();
+        $this->view = new AdminProductsView($this->sessionUtils->getCurrentUser());
     }
 
 

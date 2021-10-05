@@ -80,21 +80,22 @@ INSERT INTO `products` (`id`, `name`, `price`, `size`, `category_id`) VALUES
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `email` varchar(30) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `password` varchar(100) NOT NULL,
+  `is_admin` TINYINT NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `users` ADD UNIQUE( `email`);
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id`, `email`, `password`) VALUES
-(1, 'dairagalceran@gmail.com', 'tudai'),
-(2, 'mehb710@hotmail.com', 'cachari'),
-(3, 'dairagalceran@gmail.com', 'dade'),
-(4, 'mehb710@hotmail.com', 'cachari'),
-(5, 'dairagalceran@frdddk', 'papa'),
-(6, 'mate', '$2y$10$eS7sh9QlTkEgkaANI1yJa.PXecvdawd6GZWKUaqHKniPIGWs8kgEe'),
-(7, 'papa', '$2y$10$YuGGSeFu44VjR.ocqT6OF.nAiA2zJpFAmeWCYWOoGf2Qc1znT/PO2');
+(1, 'dairagalceran@gmail.com', 'e10adc3949ba59abbe56e057f20f883e'),
+(2, 'mehb710@hotmail.com', 'e10adc3949ba59abbe56e057f20f883e'),
+(5, 'dairagalceran@frdddk', 'e10adc3949ba59abbe56e057f20f883e'),
+(6, 'mate', 'e10adc3949ba59abbe56e057f20f883e'),
+(7, 'papa', 'e10adc3949ba59abbe56e057f20f883e');
 
 --
 -- Índices para tablas volcadas
