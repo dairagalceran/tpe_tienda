@@ -1,7 +1,10 @@
 <?php
+
 require_once 'controllers/CategoryController.php';
 require_once 'controllers/ProductsController.php';
 require_once 'controllers/AdminController.php';
+
+
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
@@ -25,17 +28,6 @@ switch ($params[0]) {
     case 'admin':
         $controllerAdmin->showForms();
         break;
-     /*   
-    case 'borrar':
-        $controller->delTask($params[1]);
-        break;
-    case 'completar':
-        $controller->completeTask($params[1]);
-        break;
-    case 'restore':
-        $controller->restoreTask($params[1]);
-        break;
-        */
     case 'categoria':
         $controller->showCategories();   
         break;
@@ -47,11 +39,29 @@ switch ($params[0]) {
         break;
     case 'deleteCategory':
         $controllerAdmin->deleteCategory($params[1]);   
-         break;
+        break;
+    case 'itemsCategory':
+        $controller->showItemsClass($params[1]); 
+        break;
+    case 'admin':
+        $controllerAdmin-> completeFormsAdmin() ;  
+        break;
+    case 'postCategory':
+        $controllerAdmin->upsertClass($params[1]); 
+        break;
+    case'formCategory':
+        $controllerAdmin->showClassEditForm($params[1]);
+        break;
     case 'productView':
         $controllerProducts->showProduct($params[1]);   
         break;
-        
+    case 'postProduct':
+        $controllerAdmin->upsertProduct($params[1]);   
+        var_dump('dentro de post producto '.$params[1]);   
+        break;  
+    case 'deleteProduct':
+        $controllerAdmin->deleteProduct($params[1]);
+        break;
     default:
         echo '404 - Página no encontrada';
         break;

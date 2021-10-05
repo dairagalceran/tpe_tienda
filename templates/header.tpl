@@ -21,10 +21,11 @@
                 </button>
                 <div id="navbarText" class="collapse navbar-collapse" >
                     <ul class="navbar-nav  ms-5 ">
-                        <li class="nav-item"> <a class="nav-link active"  href="#">Home</a></li>
+                        <li class="nav-item"> <a class="nav-link active"  href="">Home</a></li>
                         <li class="nav-item"><a class="nav-link active"  href="categoria">Categorias</a></li>
                         <li class="nav-item"><a class="nav-link active"  href="#">Catálogo</a> </li>
                         <li class="nav-item"><a class="nav-link active"  href="admin">Administrador</a> </li>
+
                     </ul>
                 </div>
         
@@ -36,7 +37,7 @@
                     </ul>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="userform.tpl">Registrarse</a>
+                            <a class="nav-link active" aria-current="page" href="register">Registrarse</a>
                         </li>
                     </ul>
                 </div>
