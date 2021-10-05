@@ -1,7 +1,7 @@
 <?php
 
-include_once('models/productsModel.php');
-include_once('views/productsView.php');
+include_once('models/ProductsModel.php');
+include_once('views/ProductsView.php');
 
 class ProductsController {
 
@@ -22,5 +22,6 @@ class ProductsController {
         $product = $this->model->getProduct($id);
         $this->view->showProduct($product);
     }
-    
+
+   
 }

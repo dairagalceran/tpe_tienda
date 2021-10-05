@@ -10,11 +10,11 @@
                 <th scope="col" class="list-group-item list-group-item-secondary ">Eliminar</th>
             </tr>             
             <tbody>
-                {foreach from= $categorias item=$class}
+                {foreach from= $categories item=$id_categoria}
                     <tr>
-                        <td> <a class="list-group-item list-group-item-action list-group-item-success"> {$class->categoria|upper} </a></td>
-                        <td> <a class="btn btn-danger  list-group-item list-group-item-action list-group-item-secondary" href="editCategory/{$class->id_categoria}">   Editar </a></td>
-                        <td> <a class="btn btn-danger  list-group-item list-group-item-action list-group-item-secondary" href="deleteCategory/{$class->id_categoria}">   Eliminar </a></td>
+                        <td> <a class="list-group-item list-group-item-action list-group-item-success"> {$id_categoria->categoria|upper} </a></td>
+                        <td> <a class="btn btn-danger  list-group-item list-group-item-action list-group-item-secondary" href="editCategory/{$id_categoria->id_categoria}">   Editar </a></td>
+                        <td> <a class="btn btn-danger  list-group-item list-group-item-action list-group-item-secondary" href="deleteCategory/{$id_categoria->id_categoria}">   Eliminar </a></td>
                     </tr>
                 {/foreach}
             </tbody>

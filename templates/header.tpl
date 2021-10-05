@@ -24,6 +24,7 @@
                         <li class="nav-item"> <a class="nav-link active"  href="#">Home</a></li>
                         <li class="nav-item"><a class="nav-link active"  href="categoria">Categorias</a></li>
                         <li class="nav-item"><a class="nav-link active"  href="#">Catálogo</a> </li>
+                        <li class="nav-item"><a class="nav-link active"  href="admin">Administrador</a> </li>
                     </ul>
                 </div>
         

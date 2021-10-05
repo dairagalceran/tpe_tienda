@@ -1,6 +1,6 @@
 <?php
 
-class ClassModel {
+class AdminModel {
 
     private $db;
 
@@ -8,10 +8,8 @@ class ClassModel {
         $this->db = new PDO('mysql:host=localhost;'.'dbname=db_tienda;charset=utf8', 'root', '');
     }
 
-    /**
-     * Obtener todas las categorias de la DB
-     */
-    function getAllClasses() {
+
+    function getAllCategories() {
         $query = $this->db->prepare('SELECT * FROM categorias');
         $query->execute();
         $classes = $query->fetchAll(PDO::FETCH_OBJ); 
@@ -19,20 +17,23 @@ class ClassModel {
         return $classes;
     }
 
-    function deleteClass($id){
+    function deleteCategory($id){
         $query = $this->db->prepare('DELETE  FROM  categorias WHERE id_categoria = ?');
         $query->execute([$id]);
     }
 
-    function insertClass($class){
+    function insertCategory($category){
         $query = $this->db->prepare('INSERT INTO categorias(categoria) VALUES (?)');
-        $query->execute([$class]);
+        $query->execute([$category]);
         return $this->db->lastInsertId();
     }
-   
 
-    
-    
-    
+    function getAllProducts() {
+        $query = $this->db->prepare('SELECT `categorias`.categoria, `productos`.nombre_producto, `productos`.precio ,`productos`.id_producto FROM `productos`INNER JOIN `categorias` WHERE `categorias`.id_categoria = `productos`.id_categoria
+        ');
+        $query->execute();
+        $products = $query->fetchAll(PDO::FETCH_OBJ); // obtengo un arreglo con TODAS las tareas
+
+        return $products;
+    }
 }
-

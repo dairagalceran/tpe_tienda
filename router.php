@@ -1,12 +1,9 @@
 <?php
-require_once 'controllers/classController.php';
-require_once 'controllers/productsController.php';
+require_once 'controllers/CategoryController.php';
+require_once 'controllers/ProductsController.php';
+require_once 'controllers/AdminController.php';
 
-
-
-// defino la base url para la construccion de links con urls semánticas
-define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
-
+define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
 if (!empty($_GET['action'])){
     $action = $_GET['action'];
@@ -17,18 +14,18 @@ else {
 
 $params = explode('/', $action);
 
-$controller = new ClassController();
+$controller = new CategoryController();
 $controllerProducts = new ProductsController();
+$controllerAdmin = new AdminController();
 
 switch ($params[0]) {
     case 'home':
         $controllerProducts->showProducts();
+        break; 
+    case 'admin':
+        $controllerAdmin->showForms();
         break;
      /*   
-    case 'register':
-        $controller->registerUser();
-        break;
-        
     case 'borrar':
         $controller->delTask($params[1]);
         break;
@@ -40,13 +37,16 @@ switch ($params[0]) {
         break;
         */
     case 'categoria':
-        $controller->showClasses();   
+        $controller->showCategories();   
         break;
     case 'formCategory':
-        $controller->createEditClass($params[1]);   
+        $controllerAdmin->createEditCategory($params[1]);   
         break;
-     case 'deleteCategory':
-        $controller->deleteClass($params[1]);   
+    case 'itemsCategory':
+        $controller->showItemsCategory($params[1]);
+        break;
+    case 'deleteCategory':
+        $controllerAdmin->deleteCategory($params[1]);   
          break;
     case 'productView':
         $controllerProducts->showProduct($params[1]);   
