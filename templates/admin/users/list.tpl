@@ -5,7 +5,7 @@
 <div class="container">
     <div >
         <h3>ADMIN - {$title}</h3>
-        <a class="btn btn-primary" href="admin/users/new">Nuevo</a>
+        <a class="btn btn-primary" href="{BASE_URL}/admin/users/new">Nuevo</a>
         <table class="table">
             <thead>
             <tr>
@@ -19,8 +19,8 @@
                     <td>{$user->id}</td>
                     <td>{$user->email|upper}</td>
                     <td>
-                        <a class="btn btn-primary" href="admin/users/show/{$user->id}">Ver</a>
-                        <a class="btn btn-primary" href="admin/users/edit/{$user->id}">Editar</a>
+                        <a class="btn btn-primary" href="{BASE_URL}/admin/users/show/{$user->id}">Ver</a>
+                        <a class="btn btn-primary" href="{BASE_URL}/admin/users/edit/{$user->id}">Editar</a>
                     </td>
                 </tr>
             {/foreach}

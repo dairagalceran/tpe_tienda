@@ -19,7 +19,7 @@ class UsersView {
     }
 
     function redirectToIndex(){
-        header("Location: " . BASE_URL.ROUTE_PRODUCTS);
+        header("Location: " . BASE_URL."/products");
     }
 
     function notFound(){

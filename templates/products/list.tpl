@@ -17,10 +17,10 @@
             <tbody>
             {foreach from=$products item=$product }
                 <tr>
-                    <td><a class="category-link" href="categories/show/{$product->category_id}">{$product->category|upper}</a></td>
+                    <td><a class="category-link" href="{BASE_URL}/categories/show/{$product->category_id}">{$product->category|upper}</a></td>
                     <td>{$product->name|capitalize}</td>
                     <td>{$product->price}</td>
-                    <td><a class="btn btn-success" href="products/show/{$product->id}">Ver</a> </td>
+                    <td><a class="btn btn-success" href="{BASE_URL}/products/show/{$product->id}">Ver</a> </td>
                 </tr>
             {/foreach}     
             </tbody>

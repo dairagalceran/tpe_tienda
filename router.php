@@ -35,6 +35,11 @@ $path = ROUTE_PRODUCTS;
 if (!empty($_GET['path'])){
     $path = $_GET['path'];
 }
+/*
+localhost/products/show/4
+path = products/show/4
+$params = [products , show , 4]
+*/
 $params = explode('/', $path);
 $paramsCount = count($params);
 
@@ -43,6 +48,10 @@ if( $params[0] === 'admin'){
     $paramsCount--;
     array_shift($params);
 }
+
+/*
+   array_shift saca y devuelve el 1er elemento del array
+*/
 
 $controllerName = array_shift($params);
 $action = 'list';
@@ -58,19 +67,21 @@ if($isAdminRoute && (!$sessionUser || !$sessionUser['is_admin'])){
 $controller = null;
 
 switch ($controllerName) {
-    case ROUTE_USERS:
+    case 'users':
         $controller = $isAdminRoute ? new AdminUsersController() : new UsersController();
         break;
-    case ROUTE_CATEGORIES:
+    case 'categories':
         $controller = $isAdminRoute ? new AdminCategoriesController() : new CategoriesController();
         break;
-    case ROUTE_PRODUCTS:
+    case 'products':
     case 'home':
         $controller = $isAdminRoute ? new AdminProductsController() : new ProductsController();
         break;
 }
+
 if($controller){
     $controller->handleAction($action,$params);
 }else{
     notFound();
 }
+

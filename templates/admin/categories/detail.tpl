@@ -23,9 +23,9 @@
                     <td>{$product->price}</td>
                     <td>{$product->size|upper}</td>
                     <td>
-                        <a class="btn btn-success" href="admin/products/show/{$product->id}">Ver</a>
-                        <a class="btn btn-primary" href="admin/products/edit/{$product->id}">Editar</a>
-                        <a class="btn btn-danger" href="admin/products/delete/{$product->id}">Eliminar</a>
+                        <a class="btn btn-success" href="{BASE_URL}/admin/products/show/{$product->id}">Ver</a>
+                        <a class="btn btn-primary" href="{BASE_URL}/admin/products/edit/{$product->id}">Editar</a>
+                        <a class="btn btn-danger" href="{BASE_URL}/admin/products/delete/{$product->id}">Eliminar</a>
                     </td>
                 </tr>
             {/foreach}     

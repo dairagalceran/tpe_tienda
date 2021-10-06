@@ -5,7 +5,7 @@
 <div class="container">
     <div>
         <h3>ADMIN</h3>
-        <form action="admin/categories/{if $category != null}edit{else}new{/if}" method="POST" class="my-4">
+        <form action="{BASE_URL}/admin/categories/{if $category != null}edit{else}new{/if}" method="POST" class="my-4">
             <div class="row">
                 <div class="col-9">
                     <div class="form-group">

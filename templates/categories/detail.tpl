@@ -22,7 +22,7 @@
                     <td>{$product->name|capitalize}</td>
                     <td>{$product->price}</td>
                     <td>{$product->size|upper}</td>
-                    <td><a class="btn btn-success" href="products/show/{$product->id}">Ver</a> </td>
+                    <td><a class="btn btn-success" href="{BASE_URL}/products/show/{$product->id}">Ver</a> </td>
                 </tr>
             {/foreach}     
             </tbody>

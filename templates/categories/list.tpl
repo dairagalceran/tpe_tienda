@@ -16,7 +16,7 @@
                     <td>{$category->id}</td>
                     <td>{$category->name|upper}</td>
                     <td>
-                        <a class="btn btn-primary" href="categories/show/{$category->id}">Ver</a>
+                        <a class="btn btn-primary" href="{BASE_URL}/categories/show/{$category->id}">Ver</a>
                     </td>
                 </tr>
             {/foreach}

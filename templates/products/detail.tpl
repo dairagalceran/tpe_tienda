@@ -11,10 +11,10 @@
     <ul class="list-group list-group-flush">
         <li class="list-group-item">$ {$product->price}</li>
         <li class="list-group-item">Talle: {$product->size|upper}</li>
-        <li class="list-group-item"><a class="category-link" href="categories/show/{$product->category_id}">{$product->category|upper}</a></li>
+        <li class="list-group-item"><a class="category-link" href="{BASE_URL}/categories/show/{$product->category_id}">{$product->category|upper}</a></li>
     </ul>
     <div class="card-body">
-        <a href="{$home}"> Volver</a>
+        <a href="{BASE_URL}/{$home}"> Volver</a>
      
     </div>
 </div>

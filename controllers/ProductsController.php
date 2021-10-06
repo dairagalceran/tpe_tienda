@@ -22,7 +22,11 @@ class ProductsController {
                 $this->index();
                 break;
             case 'show':
-                $this->show($params[0]);
+                if (count($params)>0){
+                    $this->show($params[0]);
+                }else{
+                    $this->view->notFound();
+                }
                 break;
             default:
                 $this->view->notFound();

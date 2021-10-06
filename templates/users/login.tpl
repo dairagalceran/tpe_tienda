@@ -5,7 +5,7 @@
 <div class="container">
     <div>
         <h3>LOGIN</h3>
-        <form action="users/login" method="POST" class="my-4">
+        <form action="{BASE_URL}/users/login" method="POST" class="my-4">
             <div class="row">
                 <div class="col-9">
                     <div class="form-group">

@@ -40,7 +40,7 @@ class AdminProductsView {
     }
 
     function redirectToIndex(){
-        header("Location: " . BASE_URL.'admin/'.ROUTE_PRODUCTS);
+        header("Location: " . BASE_URL.'/admin/products');
     }
 
     function notFound(){
