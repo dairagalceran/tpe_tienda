@@ -12,16 +12,23 @@ class ProductsView {
 
     
     function showProducts($products){
-        $this->smarty->assign('tituloProducts','Tu tienda de moda online');
+        $this->smarty->assign('titleProducts','Tu tienda de moda online');
         $this->smarty->assign('products', $products);
         
-        $this->smarty->display('../templates/productsList.tpl');
+        $this->smarty->display('../templates/products/productsList.tpl');
     }
 
     function showProduct($product){
-        $this->smarty->assign('tituloProduct','Hecho para ti');
+        $this->smarty->assign('titleProduct','Hecho para ti');
         $this->smarty->assign('product', $product);
 
-        $this->smarty->display('../templates/productDetail.tpl');
+        $this->smarty->display('../templates/products/productDetail.tpl');
+    }
+
+    function showProductsByCategory($products){
+        $this->smarty->assign('tituloProducts','Elegido para');
+        $this->smarty->assign('products', $products);
+        
+        $this->smarty->display('../templates/productsList.tpl');
     }
 }

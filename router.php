@@ -1,11 +1,12 @@
 <?php
-require_once 'controllers/classController.php';
-require_once 'controllers/productsController.php';
 
 
+require_once('controllers/CategoryController.php');
+require_once('controllers/ProductsController.php');
+require_once('controllers/adminController.php');
+require_once('controllers/loginController.php');
 
-// defino la base url para la construccion de links con urls semánticas
-define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
+define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']));
 
 
 if (!empty($_GET['action'])){
@@ -14,44 +15,66 @@ if (!empty($_GET['action'])){
 else {
     $action = 'home';
 }
-
 $params = explode('/', $action);
 
-$controller = new ClassController();
+$controllerCategory = new CategoryController();
 $controllerProducts = new ProductsController();
+$controllerAdmin = new AdminController();
 
 switch ($params[0]) {
     case 'home':
         $controllerProducts->showProducts();
+        break; 
+    case 'admin':
+        $controllerAdmin->completeFormAdmin();
         break;
-     /*   
-    case 'register':
-        $controller->registerUser();
+    case 'login':
+        $loginController = new LoginController();
+        $loginController->showLogin();
         break;
-        
-    case 'borrar':
-        $controller->delTask($params[1]);
+    case 'verify': 
+        $loginController = new LoginController();
+        $loginController->login();
         break;
-    case 'completar':
-        $controller->completeTask($params[1]);
+    case 'logout': 
+        $loginController = new LoginController();
+        $loginController->logout();
         break;
-    case 'restore':
-        $controller->restoreTask($params[1]);
+    case 'registerForm': 
+        $loginController = new LoginController();
+        $loginController->registerForm();
         break;
-        */
-    case 'categoria':
-        $controller->showClasses();   
+    case 'register': 
+        $loginController = new LoginController();
+        $loginController->registerUser();
         break;
-    case 'formCategory':
-        $controller->createEditClass($params[1]);   
+    case 'category':
+        $controllerCategory->showCategories(); 
         break;
-     case 'deleteCategory':
-        $controller->deleteClass($params[1]);   
-         break;
+    case 'postCategory':
+        $controllerAdmin->upsertCategories($params[1]); 
+        break;
+    case'editCategory':
+        $controllerAdmin->showCategoriesEditForm($params[1]);
+        break;
+    case 'deleteCategory':
+        $controllerAdmin->deleteCategory($params[1]);
+        break;
+    case 'productsCategory':
+        $controllerCategory->showItemsByCategory($params[1]);
+        break;
+    case 'postProduct':
+        $controllerAdmin->upsertProduct($params[1]);      
+        break;  
     case 'productView':
-        $controllerProducts->showProduct($params[1]);   
+        $controllerProducts->showProduct($params[1]); 
         break;
-        
+    case 'deleteProduct':
+        $controllerAdmin->deleteProduct($params[1]);
+        break;
+    case 'editProductForm':
+        $controllerAdmin->showProductsEditForm($params[1]);
+        break;
     default:
         echo '404 - Página no encontrada';
         break;

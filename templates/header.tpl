@@ -16,34 +16,37 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-dark ">
             <div class="container-fluid">
                 <a class="navbar-brand" href="">tiendaMIA</a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarText" >
-                    <span class="navbar-toggler-icon"></span>
-                </button>
                 <div id="navbarText" class="collapse navbar-collapse" >
                     <ul class="navbar-nav  ms-5 ">
-                        <li class="nav-item"> <a class="nav-link active"  href="#">Home</a></li>
-                        <li class="nav-item"><a class="nav-link active"  href="categoria">Categorias</a></li>
-                        <li class="nav-item"><a class="nav-link active"  href="#">Catálogo</a> </li>
+                        <li class="nav-item"><a class="nav-link active"  href="">Catálogo</a> </li>
+                        <li class="nav-item"><a class="nav-link active"  href="tpe_tienda/category">Categorias</a></li>
+                        <li class="nav-item"><a class="nav-link active"  href="{BASE_URL}/admin">Administrador</a> </li>
                     </ul>
                 </div>
-        
+                
                 <div>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="">Iniciar sesión</a>
+                            {if isset($smarty.session.USER_ID)} 
+                                <a class="nav-link active" aria-current="page" href="{BASE_URL}/logout">Logout de {$smarty.session.USER_EMAIL}</a>
+                            {else}  
+                                <a class="nav-link active" aria-current="page" href="{BASE_URL}/login">Iniciar sesión</a>
+                            {/if}
                         </li>
                     </ul>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="userform.tpl">Registrarse</a>
+                        <li class="nav-item"> 
+                            <a class="nav-link active" aria-current="page" href="{BASE_URL}/registerForm">Registrarse</a>
                         </li>
                     </ul>
                 </div>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarText" >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             </div>
         </nav>
   
     </header>
-    
-    <!-- inicio de contenido principal -->
+
     <div class="container">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    
