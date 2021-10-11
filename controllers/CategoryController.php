@@ -2,25 +2,31 @@
 
 include_once('models/CategoryModel.php');
 include_once('views/CategoryView.php');
+include_once('models/productsModel.php');
 
-class CategoryController {
+ class CategoryController {
 
-    private $model;
+    private $categoryModel;
+    private $productModel;
     private $view;
+    
 
     public function __construct() {
-        $this->model = new CategoryModel();
-        $this->view = new CategoryView();
+        $this->categoryModel = new CategoriesModel();
+        $this->productModel = new ProductsModel();
+        $this->view = new CategoriesView();
     }
 
-    public function showCategories() {
-        $category = $this->model->getAllCategories();
-        $this->view->showCategories($category);
-    }
-
-    public function showItemsCategory($id){
-        $product = $this->model->getItemsCategory($id);
-        $this->view->showItemsCategory($product);
+    function showCategories() {
+        $categories = $this->categoryModel->getAllCategories();
+        $this->view->showCategories($categories);
     }
     
+    function showItemsByCategory($id){
+        $category = $this->categoryModel->getById($id);
+        $products = $this->productModel->getByCategory($id);
+        $this->view->showItemsCategory($products,$category);
+    }
+   
 }
+

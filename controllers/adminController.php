@@ -2,26 +2,35 @@
 
 include_once('models/adminModel.php');
 include_once('views/adminView.php');
+include_once('helpers/loginHelper.php');
 
 class AdminController {
 
     private $model;
     private $view;
+    private $loginHelper;
 
     public function __construct() {
         $this->model = new AdminModel();
         $this->view = new AdminView();
+        $this->loginHelper = new LoginHelper();
     }  
 
-
-    public function completeFormsAdmin() {
+    
+    public function completeFormAdmin() {
         $products = $this->model->getAllProducts();
-        $classes = $this->model->getAllClasses();
-        $this->view->showClassesProducts($classes, $products);
+        $categories = $this->model->getAllCategories();
+        $this->view->showCategoriesProducts($categories, $products);
+    }
+
+    function showProductsEditForm($id){
+        $product = $this->model->findProductById($id);
+        $categories = $this->model->getAllCategories();
+        $this->view->completeEditProductForm($product , $categories);
     }
     
     function upsertProduct($product){
-        $id= $_REQUEST['id_producto'];
+        $id= $_REQUEST['id'];
         if($id){
             $this->editProduct($id);
         }else{
@@ -29,66 +38,75 @@ class AdminController {
         }
     }
     function editProduct($id){
-        //armar
+            $this->loginHelper->checkLoggedIn();
+            $productId= $_REQUEST['id'];
+            $productName = $_REQUEST['name'];
+            $productPrice = $_REQUEST['price'];
+            $productSize = $_REQUEST['size'];
+            $category_id = $_REQUEST['category_id'];
+            
+            $this->model->updateProduct($productId , $productName,$productPrice, $productSize, $category_id);
+            header("Location: " . BASE_URL."/admin");
     }
 
-    // NO FUNCIONA //
+    
     function insertProduct($product){
-        var_dump('dentro de inserr oductos  '.$product);
-        $product= $_REQUEST['nombre_producto'];
-        $talle = $_REQUEST['talle'];
-        $precio = $_REQUEST['precio'];
-        $categoria = $_REQUEST['id_categoria'];
+        $this->loginHelper->checkLoggedIn();
+        $productName= $_REQUEST['name'];
+        $productSize = $_REQUEST['size'];
+        $productPrice = $_REQUEST['price'];
+        $category_id = $_REQUEST['category_id'];
 
-        $this->model->insertProduct($product, $talle, $precio, $categoria);
-        header("Location: " . BASE_URL."admin"); 
+        $this->model->insertProduct($productName, $productSize, floatval($productPrice), $category_id);
+        header("Location: " . BASE_URL."/admin"); 
     }
 
     function deleteProduct($id){
+        $this->loginHelper->checkLoggedIn();
         $this->model->deleteProduct($id);
-        header("Location: " . BASE_URL ."admin");
+        header("Location: " . BASE_URL ."/admin");
 
     }
-    // INCOMPLETA
-    function registerUser(){
-        $this->view->showRegisterForm();
-    }    
-        
-    function showClassEditForm($id){
-        $category = $this->model->findClassById($id);
-        $this->view->completeEditForm($category);
-    }
 
-    function upsertclass($class){
-        $id= $_REQUEST['id_categoria'];
+ 
+   
+    function upsertCategories($category){
+        $id= $_REQUEST['id'];
         if($id){
-            $this->editClass($id);
+            $this->editCategory($id);
         }else{
-            $this->createClass($class);
+            $this->createCategory($category);
         }
     }
 
-    private function createClass($class){
-        $class = $_REQUEST['categoria'];
-        if(!empty($class)){
-            $this->model->insertClass($class);
-            header("Location: " . BASE_URL."admin"); 
+    function createCategory($category){
+        $this->loginHelper->checkLoggedIn();
+        $category = $_REQUEST['name'];
+        if(!empty($category)){
+            $this->model->insertCategory($category);
+            header("Location: " . BASE_URL."/admin"); 
         }else {
             $this->view->showError("Faltan datos obligatorios"); //no funciona VERRRRRR
         }   
     }
     
-    private function editClass($id){
-        $categoria = $_REQUEST['categoria'];
-        $this->model->updateClass($id, $categoria);
-        header("Location: " . BASE_URL ."admin");
+     function editCategory($id){
+        $this->loginHelper->checkLoggedIn();
+        $categoryName = $_REQUEST['name'];
+        $this->model->updateCategory($id, $categoryName);
+        header("Location: " . BASE_URL ."/admin");
     }
 
-    function deleteClass($id){
-        $this->model->deleteClass($id);
-        header("Location: " . BASE_URL ."admin");
+    function showCategoriesEditForm($id){
+        $category = $this->model->findCategoryById($id);
+        $this->view->completeEditForm($category);
+    }
+
+    function deleteCategory($id){
+        $this->loginHelper->checkLoggedIn();
+        $this->model->deleteCategory($id);
+        header("Location: " . BASE_URL ."/admin");
     }
     
-  
 }
 

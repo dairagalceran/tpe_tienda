@@ -3,13 +3,8 @@
 
 <div class="container">
 
-    <form class="d-flex mt-5 mb-5">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
-
     <div >
-        <h3>{$tituloProducts}</h3>
+        <h3>{$titleProducts}</h3>
         <table class="table">
             <thead>
                 <tr>
@@ -23,10 +18,10 @@
             <tbody>
             {foreach from=$products item=$product }
                 <tr>
-                    <th scope="row">{$product->categoria|upper}</th>
-                    <td>{$product->nombre_producto|capitalize}</td>
-                    <td>{$product->precio}</td>
-                    <td><a class="btn btn-success" href="productView/{$product->id_producto}">Ver</a> </td>
+                    <td scope="row"><a class= "list-group-item" href="{BASE_URL}/productsCategory/{$product->category_id}">{$product->category|upper}</a></th>
+                    <td>{$product->name|capitalize}</td>
+                    <td>{$product->price}</td>
+                    <td><a class="btn btn-success" href="{BASE_URL}/productView/{$product->id}">Ver</a> </td>
                 </tr>
             {/foreach}     
             </tbody>

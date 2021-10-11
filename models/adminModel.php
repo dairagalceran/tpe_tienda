@@ -8,62 +8,73 @@ class AdminModel {
         $this->db = new PDO('mysql:host=localhost;'.'dbname=db_tienda;charset=utf8', 'root', '');
     }
 
-    /**
-     * Obtener todas las categorias de la DB
-     */
-    function getAllClasses() {
-        $query = $this->db->prepare('SELECT * FROM categorias');
+    function getAllCategories() {
+        $query = $this->db->prepare('SELECT * FROM categories');
         $query->execute();
-        $classes = $query->fetchAll(PDO::FETCH_OBJ); 
+        $categories = $query->fetchAll(PDO::FETCH_OBJ); 
 
-        return $classes;
+        return $categories;
     }
 
-    function deleteClass($id){
-        $query = $this->db->prepare('DELETE  FROM  categorias WHERE id_categoria = ?');
+    function deleteCategory($id){
+        $query = $this->db->prepare('DELETE  FROM  `categories` WHERE `id` = ?');
         $query->execute([$id]);
     }
 
-    function insertProduct($product, $talle, $precio, $categoria){
-        $query = $this->db->prepare('INSERT INTO `productos`(`nombre_producto`, `talle`, `precio`, `id_categoria`) VALUES (?,?,?,?)');
-        $query->execute([$product, $talle, floatval($precio), $categoria]);
+    function insertCategory($category){
+        $query = $this->db->prepare('INSERT INTO categories(name) VALUES (?)');
+        $query->execute([$category]);
         return $this->db->lastInsertId();
     }
 
-    function insertClass($class){
-        $query = $this->db->prepare('INSERT INTO categorias(categoria) VALUES (?)');
-        $query->execute([$class]);
-        return $this->db->lastInsertId();
-    }
-   
-   
-    function findClassById($id){
-        $query = $this->db->prepare('SELECT * FROM `categorias` WHERE id_categoria =?');
+    function findCategoryById($id){
+        $query = $this->db->prepare('SELECT * FROM `categories` WHERE id =?');
         $query->execute([$id]);    
-        $class = $query->fetchAll(PDO::FETCH_OBJ);
-        return !empty($class) ? $class[0] : null;
+        $category = $query->fetchAll(PDO::FETCH_OBJ);
+        return !empty($category) ? $category[0] : null;
     }
-    
-    function updateClass($id, $categoria){
-        $query = $this->db->prepare('UPDATE `categorias` set categoria = ? WHERE id_categoria = ?');
-        $query->execute([$categoria, $id]);
-            return $id;
-        }
-        
+ 
+    function updateCategory($id, $categoryName){
+        $query = $this->db->prepare('UPDATE categories SET name = ? WHERE id = ?');
+        $query->execute([$categoryName, $id]);
+        return $id;
+    }
+ 
+        ///// products /////
+
     function getAllProducts() {
-        $query = $this->db->prepare('SELECT `categorias`.categoria, `productos`.nombre_producto, `productos`.precio, `productos`.talle ,`productos`.id_producto FROM `productos`INNER JOIN `categorias` WHERE `categorias`.id_categoria = `productos`.id_categoria
+        $query = $this->db->prepare('SELECT `categories`.name as category, `categories`.id as category_id, `products`.name, `products`.price, `products`.size ,`products`.id
+        FROM `products`INNER JOIN `categories` WHERE `categories`.id = `products`.category_id
         ');
         $query->execute();
-        $products = $query->fetchAll(PDO::FETCH_OBJ); // obtengo un arreglo con TODAS las tareas
+        $products = $query->fetchAll(PDO::FETCH_OBJ); 
     
         return $products;
     }
 
-    function deleteProduct($id){
-        $query = $this->db->prepare('DELETE  FROM  `productos`  WHERE id_producto= ?');
-        $query->execute([$id]);
+    function insertProduct($productName, $size, $price, $category_id){
+        $query = $this->db->prepare('INSERT INTO `products`(`name`, `size`, `price`, `category_id`) VALUES (?,?,?,?)');
+        $query->execute([$productName, $size, floatval($price), $category_id]);
+        return $this->db->lastInsertId();
+    }
 
+    function deleteProduct($id){
+        $query = $this->db->prepare('DELETE  FROM  `products`  WHERE id= ?');
+        $query->execute([$id]);
         
+    }
+
+    function findProductById($id){
+            $query = $this->db->prepare('SELECT `categories`.name as category, `categories`.id as category_id, `products`.name, `products`.price, `products`.size ,`products`.id FROM `products`INNER JOIN `categories` WHERE `categories`.id = `products`.category_id AND `products`.id = ?');
+            $query->execute([$id]);
+            $product = $query->fetch(PDO::FETCH_OBJ);
+            return $product;
+    }
+
+    function updateProduct($productId , $productName,$productPrice, $productSize, $category_id){
+        $query = $this->db->prepare('UPDATE `products` SET `name`= ?,`price`= ?,`size`= ?,`category_id`= ? WHERE `id`= ?');
+        $query->execute([ $productName,$productPrice, $productSize, $category_id, $productId ]);
+        return $productId ;
     }
 }
 

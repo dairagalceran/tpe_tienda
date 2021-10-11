@@ -2,7 +2,7 @@
 
 require_once './libs/smarty-master/libs/Smarty.class.php';
 
-class CategoryView {
+class CategoriesView {
 
     private $smarty;
 
@@ -10,18 +10,20 @@ class CategoryView {
         $this->smarty = new Smarty();
     }
 
-    function showCategories($classes){
+    function showCategories($categories){
+        $this->smarty->assign('title', 'Categorias');
+        $this->smarty->assign('i', '1');
+        $this->smarty->assign('categories', $categories);
 
-        $this->smarty->assign('titulo','Categorias');
-        $this->smarty->assign('categorias', $classes);
-
-        $this->smarty->display('../templates/categoryForm.tpl');
-        
+        $this->smarty->display('../templates/categories/categoryForm.tpl');
+    
     }
-    function showItemsCategory($products){
-        $this->smarty->assign('tituloProducts','Elegido para');
+
+    function showItemsCategory($products, $category){
+        $this->smarty->assign('titleItemsCategory',  $category);
         $this->smarty->assign('products', $products);
-        
-        $this->smarty->display('../templates/productsList.tpl');
+
+        $this->smarty->display('../templates/categories/productsByCategory.tpl');
     }
+   
 }

@@ -1,6 +1,6 @@
 <?php
 
-class CategoryModel {
+class CategoriesModel {
 
     private $db;
 
@@ -10,21 +10,39 @@ class CategoryModel {
 
    
     function getAllCategories() {
-        $query = $this->db->prepare('SELECT * FROM categorias');
+        $query = $this->db->prepare('SELECT * FROM categories');
         $query->execute();
-        $classes = $query->fetchAll(PDO::FETCH_OBJ); 
-
-        return $classes;
+        $categories = $query->fetchAll(PDO::FETCH_OBJ); 
+        return $categories;
     }
 
+    function getByID($id){
+        $query = $this->db->prepare('SELECT * FROM categories WHERE id =?');
+        $query->execute([$id]);
+        $category = $query->fetch(PDO::FETCH_OBJ); 
+        return $category;
+    }
+
+    function delete($id){
+        $query = $this->db->prepare('DELETE FROM categories WHERE id =?');
+        $query->execute([$id]);
+    }
+
+
+    function insert($name){
+        $query =$this->db->prepare('INSERT INTO categories(name)VALUES (?)');
+        $query->execute([$name]);
+        return $this->db->lastInsertId();
+    }
+
+    function update($id, $name){
+        $query =$this->db->prepare('UPDATE categories SET name = ? WHERE id =?');
+        $query->execute([$name, $id]);
+        return  $id;
+    }
+    
    
-    function getItemsCategory($category){
-        $query = $this->db->prepare("SELECT `categorias`.categoria, `productos`.nombre_producto, `productos`.precio ,`productos`.id_producto FROM `productos`INNER JOIN `categorias` WHERE `categorias`.id_categoria = `productos`.id_categoria AND `categorias`.id_categoria = '?' ");
-        $query->execute([$category]);
-        $products = $query->fetchAll(PDO::FETCH_OBJ); // obtengo un arreglo con TODAS las tareas
 
-        return $products;
-    }
 }
     
     

@@ -1,14 +1,14 @@
 
 {include file="templates/header.tpl"}
 
-    <form action="postCategory" method="POST" class="my-4">
+    <form action="{BASE_URL}/postCategory" method="POST" class="my-4">
         <div class="row">
             <div class="col-9">
                 <div class="form-group">
                     <label>Modificar categoría</label>
-                    <label for="categoria">Categoria</label>
-                    <input name="categoria" type="text" class="form-control" value={$categoria->categoria}>
-                    <input type="hidden" name="id_categoria"  value={$categoria->id_categoria} />
+                    <label for="name">Categoria</label>
+                    <input name="name" type="text" class="form-control" value={$categories->name}>
+                    <input type="hidden" name="id"  value={$categories->id} />
                 </div>
             </div>
         </div>
